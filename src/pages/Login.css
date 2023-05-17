@@ -1,0 +1,89 @@
+.Login-page {
+  display: flex;
+  justify-content: space-between;
+  height: 100vh;
+  width: 100%;
+  color: white;
+  background-color: #121111;
+  font-family: "Syne", sans-serif;
+  overflow: hidden;
+}
+.Login-page h1 {
+  margin: 40px 0px;
+  font-size: 3rem;
+}
+.login-holder {
+  height: 40%;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.login-holder button {
+  width: fit-content;
+  height: fit-content;
+  background-color: #212121;
+  border-radius: 10px;
+  padding: 30px;
+  color: white;
+  border: none;
+  font-size: 2rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 10;
+}
+.google-logo {
+  width: 50px;
+  height: auto;
+}
+.Login-page p {
+  font-size: 1.8rem;
+  width: 40%;
+  text-align: center;
+  text-transform: capitalize;
+}
+.login-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  position: relative;
+}
+.image-login {
+  height: 100vh;
+  width: 100%;
+  object-fit: cover;
+}
+.image-login-holder {
+  width: 50%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.filler {
+  position: absolute;
+  background: radial-gradient(
+    circle at 50px,
+    rgb(159, 159, 159) 21%,
+    rgba(167, 184, 227, 1) 79%
+  );
+  height: 50vw;
+  width: 50vw;
+  top: 85vh;
+  filter: blur(100px);
+  z-index: 1;
+  opacity: 0.3;
+  border-radius: 50%;
+}
+.topfilter {
+  position: absolute;
+  background: #121111;
+  width: 11%;
+  height: 100%;
+}
