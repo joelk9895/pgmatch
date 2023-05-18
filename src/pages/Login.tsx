@@ -1,29 +1,39 @@
 import "./Login.css";
-import { auth, googleProvider } from "../Firebase";
-import { useNavigate } from "react-router-dom";
+import { app } from "../Firebase";
 import TweenMax from "gsap";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
+import { signInWithPopup, getAuth, GoogleAuthProvider } from "firebase/auth";
 
 const Login = () => {
+  const auth = getAuth(app);
   const navigate = useNavigate();
+  const [authing, setAuthing] = useState(false);
 
   const handleSignIn = async () => {
     try {
-      const result = await auth.signInWithPopup(googleProvider);
-      const { user } = result;
-      if (user != null) {
-        // Access the credential object
-        console.log("User credentials:", user.displayName);
-        localStorage.setItem("user", JSON.stringify(user));
-        localStorage.setItem("name", JSON.stringify(user.displayName));
-        localStorage.setItem("ID", JSON.stringify(user.uid));
-        navigate("/");
-      }
-
-      // Sign-in successful
+      const provider = new GoogleAuthProvider();
+      setAuthing(true);
+      signInWithPopup(auth, provider).then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        if (credential) {
+          const token = credential.accessToken;
+          // The signed-in user info.
+          const user = result.user;
+          console.log(
+            user.displayName,
+            user.uid,
+            user.email,
+            user.photoURL,
+            user.phoneNumber
+          );
+          navigate("/feed");
+          // IdP data available using getAdditionalUserInfo(result)
+        }
+      });
     } catch (error) {
-      // Sign-in failed
-      console.error(error);
+      setAuthing(false);
     }
   };
   useEffect(() => {
@@ -88,6 +98,22 @@ const Login = () => {
         duration: 1,
         scale: 1,
         delay: 3.5,
+      }
+    );
+  }, []);
+  useEffect(() => {
+    TweenMax.fromTo(
+      "hr",
+
+      {
+        opacity: 0,
+        scaleX: 0,
+      },
+      {
+        opacity: 0.5,
+        duration: 1,
+        scaleX: 1,
+        delay: 1.5,
       }
     );
   }, []);

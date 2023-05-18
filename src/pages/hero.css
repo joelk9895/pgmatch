@@ -48,7 +48,7 @@ hr {
   background: #212121;
   border: none;
   margin-bottom: 5%;
-  z-index: -2;
+  z-index: 10;
 }
 .hero-cont {
   display: flex;

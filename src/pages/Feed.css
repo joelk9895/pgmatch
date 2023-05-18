@@ -1,9 +1,136 @@
-h1 {
+#feed {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  overflow-y: scroll;
+  width: 100%;
+  background: #121111;
   color: white;
+  font-family: "Syne", sans-serif;
+  align-items: center;
 }
-h3 {
-  color: white;
+#feed hr {
+  width: 90%;
+  height: 1px;
+  position: fixed;
+  background: #212121;
+  border: none;
+  top: 10vh;
+  margin-bottom: 0;
+  z-index: 10;
 }
-p {
+.nav-feed {
+  height: 10vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   color: white;
+  padding-inline: 20px;
+  border-radius: 20px;
+  background: #121111;
+  z-index: 100;
+}
+.filler {
+  position: fixed;
+  background: radial-gradient(
+    circle at 50px,
+    rgb(159, 159, 159) 21%,
+    rgba(167, 184, 227, 1) 79%
+  );
+  height: 70vh;
+  width: 50%;
+  top: 30vh;
+  left: 10%;
+  filter: blur(100px);
+  z-index: 1;
+  opacity: 0.3;
+  border-radius: 50%;
+}
+.user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px;
+}
+.nav-feed img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.feed-cont-hold {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+}
+.feed-cont-hold h2 {
+  align-self: flex-start;
+  margin: 5%;
+  margin-top: 15vh;
+  width: 35%;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+.feed-cont {
+  display: flex;
+  width: 90%;
+  height: 90%;
+  justify-content: center;
+  flex-wrap: wrap;
+  overflow: scroll;
+}
+.bottomfilter {
+  position: absolute;
+  bottom: -8vh;
+  width: 100%;
+  height: 60vh;
+  z-index: 99;
+  background: linear-gradient(to bottom, #121111, transparent);
+}
+.nav-feed * {
+  z-index: 100;
+}
+.nav-feed h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-inline: 4%;
+  background-image: linear-gradient(
+    to right,
+    rgba(246, 246, 246, 0.409),
+    rgb(255, 255, 255),
+    rgba(246, 246, 246, 0.409)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.nav-feed h1 span {
+  background-image: linear-gradient(
+    151deg,
+    rgb(235, 207, 172) 28%,
+    rgb(163, 189, 216) 105%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.nav-feed button {
+  background: none;
+  border: none;
+  color: pink;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  background: #212121;
+  padding: 10px 15px;
+  border-radius: 10px;
+}
+.routing-links {
+  display: flex;
+  gap: 20px;
 }
