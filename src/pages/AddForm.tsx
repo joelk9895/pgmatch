@@ -85,6 +85,7 @@ const AddForm: React.FC = () => {
       const formDataWithImage: FormData = {
         ...formData,
         photoURL: imageUrl,
+        photo: null,
       };
 
       await addDoc(collection(db, "pgs"), formDataWithImage);
