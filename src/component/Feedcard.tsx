@@ -23,7 +23,7 @@ const Feedcard: React.FC<FeedcardProps> = ({
   photo,
 }) => {
   useEffect(() => {
-    var sections = gsap.utils.toArray(".FeedCard");
+    const sections = gsap.utils.toArray<HTMLElement>(".FeedCard");
 
     sections.forEach((section) => {
       gsap.fromTo(
@@ -33,12 +33,12 @@ const Feedcard: React.FC<FeedcardProps> = ({
         },
         {
           opacity: 1,
+          stagger: 0.5,
           scrollTrigger: {
             trigger: section,
             start: "top 95%",
             end: "bottom 90%",
             scrub: 2,
-            stagger: 0.5,
           },
         }
       );

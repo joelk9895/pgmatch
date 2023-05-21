@@ -1,24 +1,21 @@
 import "./Login.css";
 import { app } from "../Firebase";
 import TweenMax from "gsap";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { signInWithPopup, getAuth, GoogleAuthProvider } from "firebase/auth";
 
 const Login = () => {
   const auth = getAuth(app);
   const navigate = useNavigate();
-  const [authing, setAuthing] = useState(false);
 
   const handleSignIn = async () => {
     try {
       const provider = new GoogleAuthProvider();
-      setAuthing(true);
       signInWithPopup(auth, provider).then((result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
         if (credential) {
-          const token = credential.accessToken;
           // The signed-in user info.
           const user = result.user;
           console.log(
@@ -32,9 +29,7 @@ const Login = () => {
           // IdP data available using getAdditionalUserInfo(result)
         }
       });
-    } catch (error) {
-      setAuthing(false);
-    }
+    } catch (error) {}
   };
   useEffect(() => {
     TweenMax.fromTo(

@@ -4,7 +4,7 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Feed from "./pages/Feed";
 import AddForm from "./pages/AddForm";
-import { AuthProvider } from "./Authcheck";
+import { AuthProvider } from "./Authcheck"; // Corrected import
 
 const App = () => {
   return (
@@ -21,7 +21,7 @@ const App = () => {
           }
         />
         <Route path="/add" element={<AddForm />} />
-        <Route path="*" element={<h1>Not Found</h1>} />
+        <Route path="/*" element={<h1>Not Found</h1>} /> {/* Corrected path */}
       </Routes>
     </BrowserRouter>
   );

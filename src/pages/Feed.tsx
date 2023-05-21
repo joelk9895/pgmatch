@@ -15,15 +15,14 @@ const Feed = () => {
   const Navigate = useNavigate();
   const { user } = useContext(AuthContext);
   console.log(user);
-  const [name, setName] = useState("");
-  const [profile, setProfile] = useState();
+  const [name, setName] = useState<string | null>(null);
   const auth = getAuth(app);
   useEffect(() => {
     if (user) {
       setName(user.displayName);
-      setProfile(user.photoURL);
     }
-  }, [user]);
+  }, [user, user?.displayName]);
+
   const handleSignOut = () => {
     signOut(auth);
   };
@@ -79,7 +78,7 @@ const Feed = () => {
           </button>
         </div>
         <div className="user">
-          <img src={profile} alt="Hello" />
+          <img src="" alt="Hello" />
 
           <button className="signout" onClick={handleSignOut}>
             Sign Out
