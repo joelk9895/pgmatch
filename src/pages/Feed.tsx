@@ -7,8 +7,12 @@ import { AuthContext } from "../Authcheck";
 import { ScrollTrigger } from "gsap/all";
 import { app } from "../Firebase";
 gsap.registerPlugin(ScrollTrigger);
+import { collection, getDocs, query } from "firebase/firestore";
+import { db } from "../Firebase";
+import { useNavigate } from "react-router";
 
 const Feed = () => {
+  const Navigate = useNavigate();
   const { user } = useContext(AuthContext);
   console.log(user);
   const [name, setName] = useState("");
@@ -23,6 +27,19 @@ const Feed = () => {
   const handleSignOut = () => {
     signOut(auth);
   };
+  const [feedData, setFeedData] = useState<any[]>([]);
+
+  useEffect(() => {
+    // Fetch data from Firestore when the component mounts
+    const fetchData = async () => {
+      const q = query(collection(db, "pgs"));
+      const querySnapshot = await getDocs(q);
+      const data = querySnapshot.docs.map((doc) => doc.data());
+      setFeedData(data);
+    };
+
+    fetchData();
+  }, []);
   useEffect(() => {
     gsap.fromTo(
       ".feed-cont-hold h2",
@@ -41,6 +58,11 @@ const Feed = () => {
       }
     );
   }, []);
+
+  const handleadd = () => {
+    Navigate("/add");
+  };
+
   return (
     <div id="feed">
       <div className="filler"></div>
@@ -52,6 +74,9 @@ const Feed = () => {
         <div className="routing-links">
           <button className="link-dash">Home</button>
           <button className="link-dash">Dashboard</button>
+          <button className="link-dash" onClick={handleadd}>
+            Add PG
+          </button>
         </div>
         <div className="user">
           <img src={profile} alt="Hello" />
@@ -64,15 +89,20 @@ const Feed = () => {
       <hr />
       <div className="feed-cont-hold">
         <h2>
-          Hi, {name} <br /> this is the curated listing for you
+          Hi, {name} <br /> we have made a curated list of PGs for you
         </h2>
         <div className="feed-cont">
-          <Feedcard />
-          <Feedcard />
-          <Feedcard />
-          <Feedcard />
-          <Feedcard />
-          <Feedcard />
+          {feedData.map((data, index) => (
+            <Feedcard
+              key={index}
+              pg_name={data.pg_name}
+              price={data.price}
+              location={data.location}
+              rating={4.5} // Add the appropriate rating value
+              amenities={data.facilities}
+              photo={data.photo}
+            />
+          ))}
         </div>
       </div>
     </div>

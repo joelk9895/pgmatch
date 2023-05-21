@@ -3,6 +3,7 @@ import "./App.css";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Feed from "./pages/Feed";
+import AddForm from "./pages/AddForm";
 import { AuthProvider } from "./Authcheck";
 
 const App = () => {
@@ -19,6 +20,8 @@ const App = () => {
             </AuthProvider>
           }
         />
+        <Route path="/add" element={<AddForm />} />
+        <Route path="*" element={<h1>Not Found</h1>} />
       </Routes>
     </BrowserRouter>
   );

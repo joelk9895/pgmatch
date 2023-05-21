@@ -4,14 +4,30 @@ import { ScrollTrigger } from "gsap/all";
 import { gsap } from "gsap";
 
 gsap.registerPlugin(ScrollTrigger);
-const Feedcard = () => {
+
+interface FeedcardProps {
+  pg_name: string;
+  price: string;
+  location: string;
+  rating: number;
+  amenities: string[];
+  photo: string;
+}
+
+const Feedcard: React.FC<FeedcardProps> = ({
+  pg_name,
+  price,
+  location,
+  rating,
+  amenities,
+  photo,
+}) => {
   useEffect(() => {
     var sections = gsap.utils.toArray(".FeedCard");
 
     sections.forEach((section) => {
       gsap.fromTo(
         section,
-
         {
           opacity: 0,
         },
@@ -28,10 +44,10 @@ const Feedcard = () => {
       );
     });
   }, []);
+
   useEffect(() => {
     gsap.fromTo(
       ".FeedCard",
-
       {
         opacity: 0,
       },
@@ -42,28 +58,25 @@ const Feedcard = () => {
       }
     );
   }, []);
-  
+
   return (
     <div className="FeedCard">
-      <img
-        src="https://images.pexels.com/photos/1612351/pexels-photo-1612351.jpeg?cs=srgb&dl=pexels-eberhard-grossgasteiger-1612351.jpg&fm=jpg"
-        alt=""
-        className="feedimg"
-      />
+      <img src={photo} alt="" className="feedimg" />
       <div className="feedtxt">
         <div className="feed-details">
-          <h3>Radissons</h3>
-          <p id="price-feed">Rs. 5000</p>
-          <p>Location: Bangalore</p>
-
+          <div className="feed-details-txt">
+            <h3>{pg_name}</h3>
+            <p id="price-feed">Rs. {price}</p>
+            <p>Location: {location}</p>
+          </div>
+          <div className="rating">
+            <p>Rating: {rating}</p>
+          </div>
         </div>
         <div className="feed-amenities">
-          <p>Wifi</p>
-          <p>AC</p>
-          <p>Food</p>
-          <p>Laundry</p>
-          <p>TV</p>
-          <p>Attached Bathroom</p>
+          {amenities.map((amenity) => (
+            <p key={amenity}>{amenity}</p>
+          ))}
         </div>
         <div className="feed-btns">
           <button className="feed-btn color-view">View</button>
