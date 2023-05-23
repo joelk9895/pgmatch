@@ -16,10 +16,13 @@ const Feed = () => {
   const { user } = useContext(AuthContext);
   console.log(user);
   const [name, setName] = useState<string | null>(null);
+  const [photo, setPhoto] = useState<string | null>(null);
+
   const auth = getAuth(app);
   useEffect(() => {
     if (user) {
       setName(user.displayName);
+      setPhoto(user.photoUrl);
     }
   }, [user, user?.displayName]);
 
@@ -35,6 +38,7 @@ const Feed = () => {
       const querySnapshot = await getDocs(q);
       const data = querySnapshot.docs.map((doc) => doc.data());
       setFeedData(data);
+      console.log(data);
     };
 
     fetchData();
@@ -78,7 +82,7 @@ const Feed = () => {
           </button>
         </div>
         <div className="user">
-          <img src="" alt="Hello" />
+          <img src={photo ? photo : ""} alt="Hello" />
 
           <button className="signout" onClick={handleSignOut}>
             Sign Out
@@ -99,7 +103,7 @@ const Feed = () => {
               location={data.location}
               rating={4.5} // Add the appropriate rating value
               amenities={data.facilities}
-              photo={data.photo}
+              photo={data.photo ? data.photo : data.photoURL}
             />
           ))}
         </div>

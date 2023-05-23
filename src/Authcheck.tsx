@@ -6,6 +6,7 @@ interface User {
   uid: string;
   email: string | null;
   displayName: string | null;
+  photoUrl: string | null;
 }
 
 interface AuthContextProps {
@@ -32,6 +33,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           uid: user.uid,
           email: user.email,
           displayName: user.displayName,
+          photoUrl: user.photoURL,
         });
         setLoading(false);
       } else {
