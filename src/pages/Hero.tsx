@@ -10,7 +10,7 @@ const Hero = () => {
 
       {
         opacity: 0,
-        y: 100,
+        y: 50,
       },
       {
         opacity: 1,
